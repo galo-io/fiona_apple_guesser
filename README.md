@@ -1,5 +1,5 @@
-# Ednaldo Pereira Guesser
-Um jogo de adivinhação de músicas de Ednaldo Pereira.
+# Fiona Apple Guesser
+A simple guessing game for Fiona Apple songs.
 
-## Implantação em Servidor Local
-A aplicação foi escrita em Javascript. Para rodar localmente, use o comando `npm run serve`.
+## Running application locally
+Use node.js command `npm run serve`.
