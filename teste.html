@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="index.js"></script>
+    <style>
+        /* Estilos CSS personalizados */
+
+        /* Estilos CSS personalizados */
+
+body {
+    font-family: "Arial", sans-serif;
+    background-color: #000000;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 2em;
+    text-align: center;
+    margin: 20px 0;
+}
+
+#infoButton {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #6c63ff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#infoButton:hover {
+    background-color: #d4d3ff;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+#infoBox {
+    background-color: #ffffff;
+    padding: 20px;
+}
+
+textarea {
+    width: 300px;
+    height: 150px;
+    resize: none;
+    margin-bottom: 10px;
+}
+
+#closeButton {
+    padding: 5px 10px;
+}
+
+button.btn {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #6c63ff;
+    color: #ffffff;
+    border: 2px solid #d4d3ff;
+    border-radius: 10px;
+    transition: all 0.5s ease;
+}
+
+button.btn:hover {
+    background-color: #d4d3ff;
+    color: #6c63ff;
+    border-color: #6c63ff;
+}
+
+#guessDiv {
+    margin-top: 20px;
+}
+
+#guessDiv label {
+    display: block;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+#guessDiv input[type="text"] {
+    width: 300px;
+    height: 30px;
+    padding: 5px;
+    font-size: 1em;
+}
+
+#warnMessage, #chancesMessage {
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+
+.social {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.social a {
+    display: inline-block;
+    margin-right: 10px;
+    color: #ffffff;
+    background-color: #6c63ff;
+    padding: 10px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.social a:hover {
+    background-color: #d4d3ff;
+}
+    </style>
+    <title>Guess Fiona Apple</title>
+</head>
+<body>
+  <h1>Guess Fiona Apple</h1>
+  <button class="btn btn--stripe" id="infoButton">How to Play</button>
+  <div id="overlay">
+      <div id="infoBox">
+          <textarea id="howToPlay">This is the information text.</textarea>
+          <button id="closeButton">Close</button>
+      </div>
+  </div>
+  <div align="center">
+      <p>Can you guess the Fiona Apple song from a 1-second sample?</p><br>
+      <audio id="player"></audio>
+      <button class="btn btn--stripe" onclick="playRandomSecond()">Play ⏵</button>
+  </div>
+  <div id="guessDiv" align="center">
+      <label for="guess1">Your guess:</label>
+      <input type="text" id="guess1" name="guess1" list="suggestions" placeholder="Type your guess..." autocomplete="off"><br><br>
+      <datalist id="suggestions"></datalist>
+  </div>
+  <div>
+      <button class="btn btn--stripe" onclick="processGuess()" type="submit">Submit</button>    
+  </div>
+  <div align="center">
+      <p id="warnMessage"></p>
+      <p id="chancesMessage"></p>
+  </div>
+  <div align="center">
+      <p>Follow galo.io on Twitter:</p><br>
+      <a href="https://twitter.com/galo_io" target="_blank">
+          <img src="./static/assets/twitter-logo.png" width="30" height="30">
+      </a>
+  </div>
+</body>
+</html>

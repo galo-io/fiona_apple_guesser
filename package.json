@@ -1,0 +1,17 @@
+{
+  "name": "guess_ednaldo",
+  "version": "1.0.0",
+  "description": "guessing game for ednaldo pereira songs",
+  "main": "index.js",
+  "scripts": {
+    "serve": "http-server -p 2611 -a localhost -o -c-1",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "@joaoreboucas1",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.1.3",
+    "http-server": "^14.1.1",
+    "mysql": "^2.18.1"
+  }
+}

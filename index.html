@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<head>
+    <script src="index.js"></script>
+    <link rel= "stylesheet" type= "text/css" href= "static/styles/index.css">
+    <title>Guess Fiona Apple</title>
+</head>
+<body>
+    <h1>Guess Fiona Apple</h1>
+    <button class="btn btn--stripe" id="infoButton">How to Play</button>
+    <div id="overlay">
+        <div id="infoBox">
+            <textarea id="howToPlay">This is the information text.</textarea>
+            <button id="closeButton">Close</button>
+        </div>
+    </div>
+    <div align="center">
+        <p>Can you guess the Fiona Apple song from a 1-second sample?</p><br>
+        <audio id="player"></audio>
+        <button class="btn btn--stripe" onclick="playRandomSecond()">Play ⏵</button>
+    </div>
+    <div id="guessDiv" align="center">
+        <label for="guess1">Your guess:</label>
+        <input type="text" id="guess1" name="guess1" list="suggestions" placeholder="Type your guess..." autocomplete="off"><br>
+        <datalist id="suggestions"></datalist>
+    </div>
+    <div>
+        <button class="btn btn--stripe" onclick="processGuess()" type="submit">Submit</button>    
+    </div>
+    <div align="center">
+        <p id="warnMessage"></p>
+        <p id="chancesMessage"></p>
+    </div>
+    <div align="center">
+        <p>Follow galo.io on Twitter:</p><br>
+        <a href="https://twitter.com/galo_io" target="_blank">
+            <img src="./static/assets/twitter-logo.png" width="30" height="30">
+        </a>
+    </div>
+</body>
+</html>
