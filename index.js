@@ -110,36 +110,11 @@ function validateGuess(userGuess) {
   return songs.includes(userGuess);
 }
 
-function createInputField() {
-  const guessDiv = document.getElementById('guessDiv');
-  const guessNumber = 5 - getChances();
-  console.log(guessNumber);
-  const nextInput = document.getElementById(`guess${guessNumber}`);
-
-  if (!nextInput) {
-    const nextInput = document.createElement('input');
-    const nextLabel = document.createElement('label');
-    nextInput.setAttribute("id", `guess${guessNumber}`);
-    nextLabel.setAttribute("for", `guess${guessNumber}`);
-    if (guessNumber === 2) {
-      nextLabel.textContent = "Second guess: ";
-    } else {
-      nextLabel.textContent = "Final guess: ";
-    }
-    
-    nextInput.placeholder = "Type your guess...";
-    guessDiv.appendChild(nextLabel);
-    guessDiv.appendChild(nextInput);
-    guessDiv.appendChild(document.createElement("br"));
-  } else {
-    nextInput.textContent = "";
-  }
-}
 
 async function processGuess() {
-  const songs = await getAllSongs();
+  songs = await getAllSongs();
   const guessNumber = 4 - getChances();
-  inputField = document.getElementById(`guess${guessNumber}`);
+  inputField = document.getElementById('guess');
   userGuess = inputField.value.trim();
   if (userGuess === '') {return;}
   if (!songs.includes(userGuess)) {
@@ -156,8 +131,7 @@ async function processGuess() {
     var msg = `You got it! The song was ${getChosenSong()} from ${getChosenAlbum()}`;
     window.location.href = redirectURL;
   } else {
-      createInputField();
-      inputField = document.getElementById(`guess${guessNumber}`);
+      inputField = document.getElementById(`guess`);
       inputField.style.background = '#FF000080';
       timeout += 1000;
       chances = chances - 1;
@@ -174,40 +148,80 @@ async function processGuess() {
   userGuess.value = '';
 }
 
+
 document.addEventListener('DOMContentLoaded', async function() {
+  
+  const suggestions = document.querySelector('.suggestions ul');
+  const songs = await getAllSongs();
+  
+  async function search(query) {
+    let options = [];
+
+    songs.forEach(function(song) {
+      if (song.slice(0, query.length) == query) {
+        options.push(song);
+      }
+    });
+    return options;
+  }
+
+  async function searchHandler(e) {
+    const inputVal = e.currentTarget.value;
+    let results = [];
+    if (inputVal.length > 0) {
+      results = await search(inputVal);
+    }
+    showSuggestions(results, inputVal);
+  }
+
+  function useSuggestion(e) {
+    inputField.value = e.target.innerText;
+    inputField.focus();
+    suggestions.innerHTML = '';
+    suggestions.classList.remove('has-suggestions');
+  }
+
+  function showSuggestions(results, inputVal) {
+    suggestions.innerHTML = '';
+
+    if (results.length > 0) {
+      for (i = 0; i < results.length; i++) {
+        let item = results[i];
+        // Highlights only the first match
+        // TODO: highlight all matches
+        const match = item.match(new RegExp(inputVal, 'i'));
+        item = item.replace(match[0], `<strong>${match[0]}</strong>`);
+        suggestions.innerHTML += `<li>${item}</li>`;
+      }
+      suggestions.classList.add('has-suggestions');
+    } else {
+      results = [];
+      suggestions.innerHTML = '';
+      suggestions.classList.remove('has-suggestions');
+    }
+  }
+
+
+
+
+  const inputField = document.getElementById('guess');
   var infoButton = document.getElementById('infoButton');
   var overlay = document.getElementById('overlay');
   var closeButton = document.getElementById('closeButton');
   var chancesMessage = document.getElementById('chancesMessage');
-  var datalist = document.getElementById('suggestions');
-  tutorial = document.getElementById('howToPlay');
-  tutorial.value = howToPlay();
   sessionStorage.setItem('chances', 3);
   chances = getChances();
   guessNumber = 4 - chances;
-  var input = document.getElementById(`guess${guessNumber}`);
+  inputField.addEventListener('keyup', searchHandler);
+  suggestions.addEventListener('click', useSuggestion);
+  tutorial = document.getElementById('howToPlay');
+  tutorial.value = howToPlay();
   chancesMessage.textContent = `You have ${chances} chances`;
-  const songs = await getAllSongs();
-
-  input.addEventListener('input', function() {
-    fieldValue = input.value.trim();
-    if (fieldValue !== '') {
-      datalist.innerHTML = '';
-      songs.forEach(function(song) {
-        if (song.slice(0, fieldValue.length) == fieldValue) {
-          var option = document.createElement('option');
-          option.value = song;
-          datalist.appendChild(option);
-        }
-      });
-    } else {
-      datalist.innerHTML = '';
-    }
-  });
+  
 
   getRandomSong();
 
-  input.addEventListener('keydown', function(event) {
+  inputField.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
       event.preventDefault();
       processGuess();

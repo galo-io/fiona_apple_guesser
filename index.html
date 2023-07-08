@@ -18,10 +18,13 @@
         <audio id="player"></audio>
         <button class="btn btn--stripe" onclick="playRandomSecond()">Play ⏵</button>
     </div>
-    <div id="guessDiv" align="center">
-        <label for="guess1">Your guess:</label>
-        <input type="text" id="guess1" name="guess1" list="suggestions" placeholder="Type your guess..." autocomplete="off"><br>
-        <datalist id="suggestions"></datalist>
+    
+    <div id="searchContainer" align="center">
+        <label for="guess">Your guess:</label>
+        <input type="text" id="guess" name="guess" placeholder="Type your guess..."><br>
+        <div class="suggestions">
+            <ul></ul>
+        </div>
     </div>
     <div>
         <button class="btn btn--stripe" onclick="processGuess()" type="submit">Submit</button>    

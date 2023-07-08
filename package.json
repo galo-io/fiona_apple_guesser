@@ -13,5 +13,13 @@
     "dotenv": "^16.1.3",
     "http-server": "^14.1.1",
     "mysql": "^2.18.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/galo-io/fiona_apple_guesser.git"
+  },
+  "bugs": {
+    "url": "https://github.com/galo-io/fiona_apple_guesser/issues"
+  },
+  "homepage": "https://github.com/galo-io/fiona_apple_guesser#readme"
 }
