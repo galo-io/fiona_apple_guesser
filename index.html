@@ -16,12 +16,12 @@
     <div align="center">
         <p>Are you a true Fiona Apple fan? Let’s find out!</p><br>
         <audio id="player"></audio>
-        <button class="btn btn--stripe" onclick="playRandomSecond()">Play ⏵</button>
+        <button id="playButton" class="btn btn--stripe" onclick="playRandomSecond()">Play 1 Second</button>
     </div>
     
     <div id="searchContainer" align="center">
         <label for="guess">Your guess:</label>
-        <input type="text" id="guess" name="guess" placeholder="Type your guess..."><br>
+        <input type="text" id="guess" name="guess" placeholder="Type your guess..." autocomplete="off"><br>
         <div class="suggestions">
             <ul></ul>
         </div>

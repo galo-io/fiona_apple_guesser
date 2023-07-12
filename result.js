@@ -29,4 +29,5 @@ document.addEventListener('DOMContentLoaded', function() {
     audioPlayer.src = `${link}.wav`;
     audioPlayer.type = 'audio/wav';
     audioPlayer.currentTime = randomSecond;
+    audioPlayer.play();
   });

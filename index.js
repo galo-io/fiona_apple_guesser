@@ -3,7 +3,7 @@ var chosenSong = null;
 var timeout = 1000;
 
 function howToPlay() {
-  return ` Click in the "Play ⏵" button to hear a sample from a random Fiona Apple song. Insert your guess and submit. You have 3 chances to guess the correct song. For each wrong guess, you can listen to one additional second. 
+  return ` Click in the "Play 1 Second" button to hear a sample from a random Fiona Apple song. Insert your guess and submit. You have 3 chances to guess the correct song. For each wrong guess, you can listen to one additional second. 
   ` 
 }
 
@@ -113,6 +113,7 @@ function validateGuess(userGuess) {
 
 
 async function processGuess() {
+  var playButton = document.getElementById('playButton');
   songs = await getAllSongs();
   const guessNumber = 4 - getChances();
   inputField = document.getElementById('guess');
@@ -138,6 +139,7 @@ async function processGuess() {
       chances = chances - 1;
       sessionStorage.setItem('chances', chances);
       chancesMessage.textContent = `You have ${chances} chances`;
+      playButton.textContent = `Play ${guessNumber+1} Seconds`
       if (chances === 0) {
         score = 0;
         sessionStorage.setItem('score', score);
