@@ -15,6 +15,7 @@ function getSongLing() {
 
 document.addEventListener('DOMContentLoaded', function() {
     var score = getScore();
+    var randomSecond = parseFloat(sessionStorage.getItem('randomSecond'));
     var scoreMessage = document.getElementById('scoreMessage');
     var audioPlayer = document.getElementById('player');
     var resultMessage = document.getElementById('resultMessage');
@@ -24,6 +25,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     chosenSong = getChosenSong();
     console.log(chosenSong);
-    audioPlayer.src = storedLink;
-    audioPlayer.type = 'audio/webm';
+    link = sessionStorage.getItem('chosenSongLink');
+    audioPlayer.src = `${link}.wav`;
+    audioPlayer.type = 'audio/wav';
+    audioPlayer.currentTime = randomSecond;
   });

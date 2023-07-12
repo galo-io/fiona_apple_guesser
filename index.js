@@ -91,6 +91,7 @@ function playRandomSecond() {
     if (randomSecond === null) { // Check if randomSecond is null (first click)
         var duration = audio.duration; // Get the total duration of the audio in seconds
         randomSecond = Math.floor(Math.random() * duration); // Generate a random second within the duration
+        sessionStorage.setItem('randomSecond', randomSecond)
     }
 
     audio.currentTime = randomSecond; // Set the current time to the random second
