@@ -139,7 +139,9 @@ async function processGuess() {
       chances = chances - 1;
       sessionStorage.setItem('chances', chances);
       chancesMessage.textContent = `You have ${chances} chances`;
-      playButton.textContent = `Play ${guessNumber+1} Seconds`
+      if (guessNumber < 3) {
+        playButton.textContent = `Play ${guessNumber+1} Seconds`
+      }
       if (chances === 0) {
         score = 0;
         sessionStorage.setItem('score', score);
@@ -161,7 +163,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     let options = [];
 
     songs.forEach(function(song) {
-      if (song.slice(0, query.length) == query) {
+      if (song.slice(0, query.length).toLowerCase() == query.toLowerCase()) {
         options.push(song);
       }
     });
