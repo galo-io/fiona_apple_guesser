@@ -89,7 +89,7 @@ function playRandomSecond() {
     var audio = document.getElementById("player");
 
     if (randomSecond === null) { // Check if randomSecond is null (first click)
-        var duration = audio.duration; // Get the total duration of the audio in seconds
+        var duration = audio.duration - 3.0; // Get the total duration of the audio in seconds, subtract 3 because i don't want the random second to be too close to the end of the song
         randomSecond = Math.floor(Math.random() * duration); // Generate a random second within the duration
         sessionStorage.setItem('randomSecond', randomSecond)
     }
