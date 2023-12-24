@@ -7,53 +7,53 @@ function howToPlay() {
   ` 
 }
 
-function getRandomSong() {
+async function getRandomSong() {
+  // Chooses a random song from the list and puts it into the sessionStorage
+  // Also puts the source of the song into the audio element of the button
   var audio = document.getElementById("player");
-  return fetch('./static/assets/songs.json')
-    .then(response => response.json())
-    .then(jsonData => {
-      const albums = Object.keys(jsonData); // Get the albums from the JSON
-      const randomAlbumIndex = Math.floor(Math.random() * albums.length); // Generate a random index to select an album
-      const album = albums[randomAlbumIndex]; // Select a random album
-      const songs = jsonData[album]; // Get the songs from the selected album
-      const songsArray = Object.entries(songs); // Convert the songs object into an array of [key, value]
+  try {
+    const response = await fetch('./static/assets/songs.json');
+    const jsonData = await response.json();
+    const albums = Object.keys(jsonData); // Get the albums from the JSON
+    const randomAlbumIndex = Math.floor(Math.random() * albums.length); // Generate a random index to select an album
+    const album = albums[randomAlbumIndex]; // Select a random album
+    const songs = jsonData[album]; // Get the songs from the selected album
+    const songsArray = Object.entries(songs); // Convert the songs object into an array of [key, value]
 
-      const randomSongIndex = Math.floor(Math.random() * songsArray.length); // Generate a random index to select a song
-      const [song, link] = songsArray[randomSongIndex]; // Select a random song
+    const randomSongIndex = Math.floor(Math.random() * songsArray.length); // Generate a random index to select a song
+    const [song, link] = songsArray[randomSongIndex]; // Select a random song
 
-      sessionStorage.setItem('chosenSong', song);
-      sessionStorage.setItem('chosenAlbum', album);
-      sessionStorage.setItem('chosenSongLink', link);
-      console.log(sessionStorage['chosenSong']);
-      audio.src =  `${link}.wav`;
-      audio.type = 'audio/wav';
-
-      return {
-        album: album,
-        song: song,
-        link: link
-      };
-    })
-    .catch(error => {
-      console.error('Error loading song: ', error);
-    });
+    sessionStorage.setItem('chosenSong', song);
+    sessionStorage.setItem('chosenAlbum', album);
+    sessionStorage.setItem('chosenSongLink', link);
+    console.log(sessionStorage['chosenSong']);
+    audio.src = `${link}.wav`;
+    audio.type = 'audio/wav';
+    return {
+      album: album,
+      song: song,
+      link: link
+    };
+  } catch (error) {
+    console.error('Error loading song: ', error);
+  }
 }
 
-function getAllSongs() {
-  return fetch('./static/assets/songs.json')
-    .then(response => response.json())
-    .then(jsonData => {
-      const albums = Object.keys(jsonData);
-      const allSongs = [];
-      for (let i = 0; i < albums.length; i++) {
-        const albumSongs = Object.keys(jsonData[albums[i]]);
-        allSongs.push(...albumSongs);
-      }
-      return allSongs;
-    })
-    .catch(error => {
-      console.error('Error loading songs:', error);
-    });
+async function getAllSongs() {
+  // Returns a list of all song names from Fiona Apple discography in `songs.jsoon`
+  try {
+    const response = await fetch('./static/assets/songs.json');
+    const jsonData = await response.json();
+    const albums = Object.keys(jsonData);
+    const allSongs = [];
+    for (let i = 0; i < albums.length; i++) {
+      const albumSongs = Object.keys(jsonData[albums[i]]);
+      allSongs.push(...albumSongs);
+    }
+    return allSongs;
+  } catch (error) {
+    console.error('Error loading songs:', error);
+  }
 }
 
 async function fetchData() {
@@ -110,7 +110,6 @@ function checkGuess(userGuess) {
 function validateGuess(userGuess) {
   return songs.includes(userGuess);
 }
-
 
 async function processGuess() {
   var playButton = document.getElementById('playButton');
