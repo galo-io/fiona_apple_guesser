@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
       } else if (chances == 1) {
         attempt = "third";
       }
+      // TODO: unhardcode url
       shareButton.href = `https://twitter.com/intent/tweet?text=I%20guessed%20${chosenSong}%20from%20${chosenAlbum}%20in%20my%20${attempt}%20attempt.%20Try%20to%20guess%20the%20Apple%20song%20in%20https%3A%2F%2Fgalo-io.github.io%2Ffiona-apple-guesser`
     } else {
       shareButton.href = `https://twitter.com/intent/tweet?text=I%20couldn%27t%20guess%20${chosenSong}%20from%20${chosenAlbum}.%20Try%20to%20guess%20the%20Apple%20song%20in%20https%3A%2F%2Fgalo-io.github.io%2Ffiona-apple-guesser`

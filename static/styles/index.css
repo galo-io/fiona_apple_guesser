@@ -1,6 +1,7 @@
 body {
   background-color: coral;
   font-family: "Consolas";
+  display: flex;
 }
 
 input {
